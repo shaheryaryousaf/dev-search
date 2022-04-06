@@ -1,0 +1,363 @@
+/* Fonts */
+@font-face {
+    font-family: 'Graphik-bold';
+    src: url('../fonts/Graphik-Bold.ttf');
+    display: swap;
+}
+
+@font-face {
+    font-family: 'Graphik-medium';
+    src: url('../fonts/Graphik-Medium-1.ttf');
+    display: swap;
+}
+
+@font-face {
+    font-family: 'Graphik-regular';
+    src: url('../fonts/Graphik-Regular-1.ttf');
+    display: swap;
+}
+
+/* Global */
+* {
+    font-family: 'Graphik-Regular';
+}
+
+.container {
+    min-width: 1280px;
+}
+
+.small__heading {
+    font-weight: 600;
+    font-family: 'Graphik-Medium';
+}
+
+.btn-primary,
+.btn-primary:hover {
+    color: white;
+    border-radius: 0;
+    border: none;
+    padding: 12px 30px;
+    font-size: 17px;
+    text-transform: uppercase;
+    background-color: #2d2d39;
+}
+
+textarea,
+input[type="text"],
+input[type="file"],
+input[type="password"],
+input[type="email"],
+select {
+    border-radius: 0px !important;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select{
+    min-height: 47px !important;
+}
+
+textarea {
+    resize: none;
+}
+
+select{
+    padding-top: 10px !important;
+} 
+
+label{
+    font-weight: 600;
+}
+
+hr {
+    background-color: #cccccc;
+}
+
+.fa-plus {
+    color: #2d2d39;
+}
+
+.small__icon i {
+    font-size: 14px;
+    color: #5aa5b9;
+}
+
+.page__section{
+    padding: 3% 0;
+}
+
+a, a:hover{
+    text-decoration: none;
+}
+
+#hint_id_password1,
+#hint_id_new_password1 {
+    display: none !important;
+}
+
+.alert ul{
+    list-style: none;
+    padding-left: 0;
+}
+
+/* Colors */
+.comet__color {
+    color: #51546e;
+}
+
+.charade_bg_color {
+    background-color: #2d2d39;
+}
+
+.mercury_bg_color {
+    background-color: #e5e5e5;
+}
+
+/* Header */
+header {
+    padding: 7px 0;
+}
+
+header .nav-item {
+    margin: 0 10px;
+}
+
+.navbar-brand,
+.navbar-brand:hover,
+header .nav-link,
+header .nav-link:hover {
+    color: white;
+}
+
+.nav-link, .nav-link:hover{
+    color: white !important;
+    text-decoration: none !important;
+}
+
+/* Search Form */
+.search__form input {
+    border: 0;
+    height: 55px;
+}
+
+.search__form input:focus {
+    outline: none !important;
+}
+
+.search__form .search__input {
+    border: 1px solid #e7e7e7;
+    padding: 0 15px;
+    background-color: white;
+}
+
+.search__form .search__input .fa-search {
+    color: #e5e5e5;
+}
+
+/* Homepage Top */
+.page__top {
+    padding: 5% 0;
+    background-color: #2d2d39 !important;
+}
+
+.page__top h1 {
+    line-height: 4rem;
+    font-size: 48px;
+    color: white !important;
+}
+
+/* Grid Display */
+.grid__display,
+.profile__detail {
+    padding: 4% 0;
+}
+
+.grid__display .grid__item,
+.profile__detail .grid__item {
+    border: 1px solid #e5e5e5;
+}
+
+.grid__display .grid__item .top img,
+.profile__detail .grid__item .top img {
+    width: 12%;
+    height: 10%;
+    border: 2px solid #e5e5e5;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.grid__display .grid__item .top h4 a,
+.profile__detail .grid__item .top h4 a {
+    font-family: 'Graphik-Medium';
+    font-weight: 600;
+    color: #212529;
+    text-decoration: none;
+}
+
+.grid__display .grid__item .meta,
+.profile__detail .grid__item .meta {
+    color: #737373;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.grid__display .grid__item .skills .bg-light,
+.profile__detail .grid__item .skills .bg-light {
+    background-color: #e5e5e5 !important;
+    padding: 7px 15px;
+}
+
+.grid__display .grid__item .project__meta h4 a,
+.profile__detail .grid__item .project__meta h4 a {
+    line-height: 2rem;
+    font-weight: 600;
+    color: #212529;
+    text-decoration: none;
+}
+
+.grid__display .grid__item .project__meta .author a,
+.profile__detail .grid__item .project__meta .author a {
+    font-style: italic;
+    color: #5aa5b9;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Pagination */
+#pagination li {
+    margin-right: 5px;
+}
+
+#pagination li a {
+    color: #2d2d39;
+    background-color: #e5e5e5;
+    padding: 10px 20px !important;
+    border-radius: 0 !important;
+    border:0px !important;
+}
+
+#pagination li.active a {
+    background-color: #2d2d39 !important;
+    color: white !important;
+}
+
+/* Single Project */
+.detail__section {
+    padding: 4% 0;
+}
+
+.detail__section .project__basic__info {
+    border-bottom: 1px solid #5aa5b9;
+}
+
+.detail__section .author {
+    font-style: italic;
+}
+
+.detail__section .title {
+    font-weight: 700;
+    font-family: 'Graphik-Medium';
+    margin: 20px 0;
+}
+
+.stacks li {
+    margin-bottom: 10px
+}
+
+.stacks .bg-light {
+    font-size: 14px;
+    padding: 12px 20px;
+    background-color: #e5e5e5 !important;
+}
+
+.external__link a,
+.detail__section .author a {
+    color: #5aa5b9;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.feedbacks img {
+    width: 8%;
+    height: 8%;
+    border-radius: 50%;
+    border: 2px solid #51546e;
+    margin-right: 20px;
+}
+
+.feedbacks h5 {
+    font-weight: 600;
+    color: #51546e !important;
+}
+
+.feedbacks p {
+    font-size: 15px;
+}
+
+/* PROFILE DETAIL */
+.profile__detail .basic__info {
+    border: 1px solid #e7e7e7;
+}
+
+.profile__detail .col-lg-8 {
+    padding-left: 4%;
+}
+
+.profile__detail .basic__info img {
+    width: 50%;
+    border-radius: 50%;
+    border: 2px solid #2d2d39;
+    margin-bottom: 15px;
+}
+
+.profile__detail .basic__info h3 {
+    font-weight: 600;
+}
+
+.profile__detail .basic__info h6 {
+    color: #51546e;
+}
+
+.profile__detail .social__links {
+    list-style: none;
+}
+
+.profile__detail .social__links li {
+    display: inline;
+    margin-right: 15px;
+}
+
+.profile__detail .social__links li a {
+    color: #51546e;
+}
+
+.profile__detail .social__links li a .fab,
+.profile__detail .social__links li a .fas {
+    font-size: 24px;
+}
+
+/* Inbox */
+.messages .list-group-item{
+    padding: 25px;
+}
+
+.messages .list-group-item a{
+    color: #2d2d39 !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .container{
+        min-width: 100% !important;
+    }
+
+    .page__top {
+        padding: 10% 5% 5% 5% !important;
+    }
+
+    .page__top h1 {
+        line-height: 3rem !important;
+        font-size: 20px !important;
+        color: white !important;
+    }
+}

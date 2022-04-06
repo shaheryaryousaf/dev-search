@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Page Top Section -->
+<section class="page__section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <h1><b>Delete "{{object}}"</b></h1>
+                <hr />
+                <p>Are you sure you want to delete "{{object}}"?</p>
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary btn-sm">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

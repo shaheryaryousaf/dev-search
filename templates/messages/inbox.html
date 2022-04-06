@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- Page Top Section -->
+<section class="page__section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <h3><b>New Messages ({{unreadMessages}})</b></h1>
+                <hr />
+                <ul class="list-group messages">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <li class="list-group-item">
+                                <a href="{% url 'message' message.id %}" class=" d-flex justify-content-between align-items-center">
+                                    {% if message.is_read == False %}
+                                        <h6 class="mb-0"><b>{{message.subject}}</b></h6>
+                                    {% else %}
+                                        <h6 class="mb-0">{{message.subject}}</h6>
+                                    {% endif %}
+                                    <small>{{message.created_at}}</small>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <p class="my-4">You don't have any message yet.</p>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

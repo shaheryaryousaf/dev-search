@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- Page Top Section -->
+<section class="page__section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <h1><b>Update Profile</b></h1>
+                <hr />
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

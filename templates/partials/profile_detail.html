@@ -1,0 +1,136 @@
+{% load static %}
+<div class="col-lg-8">
+                
+    <div class="about">
+        <div class="top d-flex justify-content-between align-items-center">
+            <h4 class="small__heading">About Me</h4>
+        </div>
+        <hr />
+        <p class="mb-4">{{profile.bio}}</p>
+    </div>
+
+    {% if request.user.profile == profile %}
+    <div class="specialize">
+        <div class="top d-flex justify-content-between align-items-center">
+            <h4 class="small__heading">Skills</h4>
+            {% if request.user == profile.user %}
+                <a href="{% url 'add-skill' %}"><i class="fas fa-plus"></i></a>
+            {% endif %}
+        </div>
+        <hr />
+        {% for skill in profile.skill_set.all %}
+            <div class="item mb-4">
+                <div class="top d-flex justify-content-between align-items-center">
+                    <h6><b>{{skill.name}}</b></h6>
+                    {% if request.user == profile.user %}
+                    <div class="action__icons">
+                        <a href="{% url 'edit-skill' skill.id %}" class="small__icon"><i class="fas fa-pencil-alt"></i></a>&nbsp;&nbsp;
+                        <a href="{% url 'delete-skill' skill.id %}" class="small__icon"><i class="far fa-trash-alt"></i></a>
+                    </div>
+                    {% endif %}
+                </div>
+                <p>{{skill.description}}</p>
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+
+    <div class="specialize">
+        <div class="top d-flex justify-content-between align-items-center">
+            <h4 class="small__heading">Skills</h4>
+            {% if request.user == profile.user %}
+                <a href="{% url 'add-skill' %}"><i class="fas fa-plus"></i></a>
+            {% endif %}
+        </div>
+        <hr />
+        {% if topSkills %}
+            {% for skill in topSkills %}
+                <div class="item mb-4">
+                    <div class="top d-flex justify-content-between align-items-center">
+                        <h6><b>{{skill.name}}</b></h6>
+                        {% if request.user == profile.user %}
+                        <div class="action__icons">
+                            <a href="#" class="small__icon"><i class="fas fa-pencil-alt"></i></a>&nbsp;&nbsp;
+                            <a href="#" class="small__icon"><i class="far fa-trash-alt"></i></a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <p>{{skill.description}}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="item mb-4">
+                <p>This user did not add any skills yet.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="skills">
+            <div class="top d-flex justify-content-between align-items-center">
+            <h5 class="small__heading">Other Skills</h5>
+        </div>
+        <hr />
+        <ul class="list-inline mb-0 stacks mt-4 mb-4">
+            {% if otherSkills %}
+                {% for skill in otherSkills %}
+                    <li class="list-inline-item">
+                        <span class="badge rounded-pill bg-light text-dark">{{skill.name}}</span>
+                    </li>
+                {% endfor %}
+            {% else %}
+                    <p>This user did not add any secondary skills yet.</p>
+            {% endif %}
+        </ul>  
+    </div>
+
+    {% endif %}
+
+    <div class="projects">
+        <div class="top d-flex justify-content-between align-items-center">
+            <h4 class="small__heading">Projects</h4>
+            {% if request.user == profile.user %}
+                <a href="{% url 'add-project' %}"><i class="fas fa-plus"></i></a>
+            {% endif %}
+        </div>
+        <hr />
+        <div class="row mt-4">
+            {% if profile.project_set %}
+                {% for project in profile.project_set.all %}
+                    <div class="col-lg-6 mb-3">
+                        <div class="grid__item p-3">
+                            <a href="{% url 'project' project.id %}">
+                                {% if project.featured_image %}
+                                    <img src="{{project.featured_image.url}}" class="img-fluid" />
+                                {% else %}
+                                    <img src="{% static 'images/project.png' %}" class="img-fluid" />
+                                {% endif %}
+                            </a>
+                            <div class="project__meta my-3">
+                                <h4><a href="{% url 'project' project.id %}">{{project.title}}</a></h4>
+                                <p class="rating mt-2"><b>{{project.vote_ratio}}%</b> positive rating ({{project.vote_total}} vote{{project.vote_total|pluralize:'s'}})</p>
+                            </div>
+                            <div>
+                                <ul class="list-inline mb-0">
+                                    {% for tag in project.tags.all %}
+                                        <li class="list-inline-item">
+                                            <span class="badge rounded-pill bg-light text-dark">{{tag.name}}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            
+                            {% if request.user == profile.user %}
+                                <hr />
+                                <div class="text-center">
+                                    <a href="{% url 'edit' project.id %}" class="small__icon"><i class="fas fa-pencil-alt"></i></a>&nbsp;&nbsp;
+                                    <a href="{% url 'delete' project.id %}" class="small__icon"><i class="far fa-trash-alt"></i></a>
+                                </div>
+                            {% endif %}
+                        </div>   
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+</div>

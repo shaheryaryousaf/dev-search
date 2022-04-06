@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Page Top Section -->
+<section class="page__section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <h3><b>Send Message</b></h3>
+                <hr />
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    {% if request.user.is_authenticated == False %}
+                        <div class="mb-3">
+                            <label class="form-label">{{form.name.label}}</label>
+                            {{form.name}}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">{{form.email.label}}</label>
+                            {{form.email}}
+                        </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label class="form-label">{{form.subject.label}}</label>
+                        {{form.subject}}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">{{form.body.label}}</label>
+                        {{form.body}}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

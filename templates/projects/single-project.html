@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- Single Project -->
+<section class="detail__section">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-4">
+                <h3 class="small__heading">Stacks and Tools</h3>
+                <ul class="list-inline mb-0 stacks mt-4 mb-4">
+                    {% for tag in project.tags.all %}
+                        <li class="list-inline-item">
+                            <span class="badge rounded-pill bg-light text-dark">{{tag.name}}</span>
+                        </li>
+                    {% endfor %}
+                </ul>  
+
+                {% if project.source_link %}
+                <div class="external__link mb-4">
+                    <a href="{{project.source_link}}" target="_blank"><i class="fas fa-external-link-alt"></i> Source Code</a>
+                </div>
+                {% endif %}
+
+                {% if project.demo_link %}
+                <div class="external__link mb-4">
+                    <a href="{{project.demo_link}}" target="_blank"><i class="fas fa-external-link-alt"></i> Demo Code</a>
+                </div>
+                {% endif %}
+
+            </div>
+
+            <div class="col-lg-8">
+                <div class="project__basic__info">
+                    {% if project.featured_image %}
+                        <img src="{{project.featured_image.url}}" class="img-fluid" />
+                    {% else %}
+                        <img src="{% static 'images/project.png' %}" class="img-fluid" />
+                    {% endif %}
+                    <h5 class="author mt-4">By <a href="{% url 'single-user' project.user.id %}">{{project.user.name}}</a></h5>
+                    <h2 class="title">{{project.title}}</h2>
+                    <div class="description">
+                        <h4 class="small__heading comet__color">About the Project</h4>
+                        <p class="mb-4">{{project.description}}</p>
+                    </div>
+                </div>
+
+                <!-- Review Form -->
+                {% if request.user.profile.id in project.reviewers %}
+                    <p class="my-4">You have already submitted the review on this project.</p>
+                {% elif request.user.profile == project.user %}
+                    <p class="my-4">You cannot review your own project.</p>
+                {% elif request.user.is_authenticated %}
+                    <div class="feedback py-4">
+                        <h4 class="small__heading comet__color">Feedback</h4>
+                        <h5>{{project.vote_ratio}}%</b> Positive Feedback ({{project.vote_total}} vote{{project.vote_total|pluralize:'s'}})</h5>
+                        <form class="mt-3" method="POST" action="{% url 'project' project.id %}">
+                            {% csrf_token %}
+                            {{form|crispy}}
+                            <button type="submit" class="btn btn-primary charade_bg_color">Add Review</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <p class="my-4">
+                        <a href="{% url 'login' %}?next={{request.path}}">Please login to leave a review.</a>
+                    </p>    
+                {% endif %}
+                
+                <!-- Reviews List -->
+                <div class="feedbacks mt-2">
+                    {% for review in project.review_set.all %}
+                        {% if review.body %}
+                            <div class="d-flex feedback__item mb-4">
+                                {% if review.user.featured_image %}
+                                    <img src="{{review.user.featured_image.url}}" class="img-fluid" />
+                                {% else %}
+                                    <img src="{% static 'images/avatar.png' %}" class="img-fluid" />
+                                {% endif %}
+                                <div>
+                                    <h5><a href="{% url 'single-user' review.user.id %}" style="color:#51546e">{{review.user.name}}</a></h5>
+                                    <p>{{review.body}}</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

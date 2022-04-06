@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- Page Top Section -->
+<section class="page__section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="{% url 'inbox' %}" class="btn btn-primary">Back to Inbox</a>
+                <hr />
+                <h2 class="mb-3"><b>{{message.subject}}</b></h2>
+                <h5 class="text-secondary mb-3"><b>From: </b>{{message.name}}</h5>
+                <p class="mb-3">
+                    <small><b>Received on: </b><i>{{message.created_at}}</i></small>
+                </p>
+                <p>{{message.body}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Top Section -->
+<section class="page__top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 m-auto text-center">
+                <h1>CONNECT WITH <b>DEVELOPERS</b> FROM AROUND THE WORLD</h1>
+                <form class="search__form my-5" method="GET">
+                    <div class="search__input d-flex align-items-center">
+                        <i class="fas fa-search"></i>
+                        <input type="text" class="form-control" name="search_query" value="{{search_query}}" placeholder="Search by name, intro, description, or skills ..." />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Developers -->
+<section class="grid__display">
+    <div class="container">
+        <div class="row">
+            
+            {% for developer in developers %}
+            <div class="col-lg-4 mb-3">
+                <div class="grid__item p-4">
+                    <div class="top d-flex">
+                        {% if developer.featured_image %}
+                            <img src="{{developer.featured_image.url}}" class="fluid" />
+                        {% else %}
+                            <img src="{% static 'images/avatar.png' %}" class="fluid" />
+                        {% endif %}
+                        <div>
+                            <h4 class="mb-0">
+                                <a href="{% url 'single-user' developer.id %}">{{developer.name}}</a>
+                            </h4>
+                            <p class="meta">{{developer.short_intro}}</p>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p>{{developer.bio|slice:"80"}}</p>
+                    </div>
+                    <div class="skills">
+                        <ul class="list-inline mb-0">
+                            {% for skill in developer.skill_set.all %}
+                                <li class="list-inline-item">
+                                    <span class="badge rounded-pill bg-light text-dark">{{skill.name}}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>    
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- Pagination Template -->
+        {% include 'partials/pagination.html' with queryset=developers custom_range=custom_range %}
+
+    </div>
+</section>
+
+{% endblock %}

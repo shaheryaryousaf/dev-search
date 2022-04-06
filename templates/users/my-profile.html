@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Profile Detail -->
+<section class="profile__detail">
+    <div class="container">
+        <div class="row">
+            
+            <!-- Profile Basic Info -->
+            {% include 'partials/profile_basic.html' %}
+
+            <!-- Profile Detail -->
+            {% include 'partials/profile_detail.html' %}
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

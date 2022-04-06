@@ -1,0 +1,55 @@
+{% load static %}
+<div class="col-lg-4 text-center">
+    <div class="basic__info p-5">
+        {% if request.user == profile.user %}
+            <a href="{% url 'update-profile' %}" class="btn btn-sm btn-secondary"><i class="fas fa-pencil-alt"></i> Edit</a>
+        {% endif %}
+        <div class="mt-3">
+            {% if profile.featured_image %}
+                <img src="{{profile.featured_image.url}}" class="fluid" />
+            {% else %}
+                <img src="{% static 'images/avatar.png' %}" class="fluid" />
+            {% endif %}
+            <h3 class="mb-3">{{profile.name}}</h3>
+
+            {% if profile.short_intro %}
+                <h6 class="mb-3">{{profile.short_intro}}</h6>
+            {% endif %}
+
+            {% if profile.location %}
+                <h5>{{profile.location}}</h5>
+            {% endif %}
+            
+            <ul class="social__links my-4">
+                {% if profile.github_link %}
+                    <li>
+                        <a href="{{profile.github_link}}" target="_blank"><i class="fab fa-github"></i></a>
+                    </li>
+                {% endif %}
+                {% if profile.stackoverflow_link %}
+                    <li>
+                        <a href="{{profile.stackoverflow_link}}" target="_blank"><i class="fab fa-stack-overflow"></i></a>
+                    </li>
+                {% endif %}
+                {% if profile.twitter_link %}
+                    <li>
+                        <a href="{{profile.twitter_link}}" target="_blank"><i class="fab fa-twitter"></i></a>
+                    </li>
+                {% endif %}
+                {% if profile.linkedin_link %}
+                    <li>
+                        <a href="{{profile.linkedin_link}}" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </li>
+                {% endif %}
+                {% if profile.website_link %}
+                    <li>
+                        <a href="{{profile.website_link}}" target="_blank"><i class="fas fa-globe-americas"></i></a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% if request.user != profile.user %}
+            <a href="{% url 'create-message' profile.id %}" class="btn btn-primary charade_bg_color">Send Message</a>
+        {% endif %}
+    </div>
+</div>

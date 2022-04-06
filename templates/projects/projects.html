@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Top Section -->
+<section class="page__top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 m-auto text-center">
+                <h1>SEARCH FOR <b>PROJECTS</b></h1>
+                <form class="search__form my-5" id="search__form" action="{% url 'projects' %}" method="GET">
+                    <div class="search__input d-flex align-items-center">
+                        <i class="fas fa-search"></i>
+                        <input type="text" class="form-control" name="search_query" value="{{search_query}}" placeholder="Search by title, description, owner or tags ... " />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects List -->
+<section class="grid__display">
+    <div class="container">
+        <div class="row">
+            
+            {% for project in projects %}
+            <div class="col-lg-4 mb-3">
+                <div class="grid__item p-4">
+                    <a href="{% url 'project' project.id %}">
+                        {% if project.featured_image %}
+                            <img src="{{project.featured_image.url}}" class="img-fluid" />
+                        {% else %}
+                            <img src="{% static 'images/project.png' %}" class="img-fluid" />
+                        {% endif %}
+                    </a>
+                    
+                    <div class="project__meta my-3">
+                        <h4><a href="{% url 'project' project.id %}">{{project.title}}</a></h4>
+                        <small class="author"><a href="{% url 'single-user' project.user.id %}">By {{project.user.name}}</a></small>
+                        <p class="rating mt-2"><b>{{project.vote_ratio}}%</b> positive rating ({{project.vote_total}} vote{{project.vote_total|pluralize:'s'}})</p>
+                    </div>
+                    
+                    <div class="skills">
+                        <ul class="list-inline mb-0">
+                            {% for tag in project.tags.all %}
+                                <li class="list-inline-item">
+                                    <span class="badge rounded-pill bg-light text-dark">{{tag.name}}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>    
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- Pagination Template -->
+        {% include 'partials/pagination.html' with queryset=projects custom_range=custom_range %}
+
+    </div>
+</section>
+
+{% endblock %}
